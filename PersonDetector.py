@@ -7,7 +7,7 @@ class PersonDetector:
     def __init__(self, model_path, labels_path):
         self.model = load_model(model_path)  # TODO: create model
         self.labels = open(labels_path, 'r').readlines()
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(0)
 
     def detect(self, desired_label):
         """
@@ -27,7 +27,8 @@ class PersonDetector:
         # Resize the raw image into (224-height,224-width) pixels
         image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
 
-        #cv2.imshow('Webcam Image', image)
+        # --- DEBUG FOOTAGE WINDOW ---
+        cv2.imshow('Webcam Image', image)
 
         # Make the image a numpy array and reshape it to the models input shape.
         image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
@@ -47,4 +48,10 @@ class PersonDetector:
             return True
 
         return False
+
+    def kill_footage(self):
+        self.camera.release()
+
+        # --- KILL DEBUG FOOTAGE WINDOW ---
+        cv2.destroyAllWindows()
 
