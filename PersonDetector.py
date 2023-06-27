@@ -44,14 +44,10 @@ class PersonDetector:
         # Get the label of the highest probability detection
         detected = (self.labels[np.argmax(probabilities)])
 
-        if detected == desired_label:
-            return True
-
-        return False
+        return detected.strip() == desired_label.strip()
+    
 
     def kill_footage(self):
         self.camera.release()
-
-        # --- KILL DEBUG FOOTAGE WINDOW ---
-        cv2.destroyAllWindows()
+        cv2.destroyAllWindows()  # --- KILL DEBUG FOOTAGE WINDOW ---
 
