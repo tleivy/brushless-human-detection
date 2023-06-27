@@ -5,7 +5,7 @@ from keras.models import load_model
 
 class PersonDetector:
     def __init__(self, model_path, labels_path):
-        self.model = load_model(model_path)  # TODO: create model
+        self.model = load_model(model_path)  # TODO: create your model
         self.labels = open(labels_path, 'r').readlines()
         self.camera = cv2.VideoCapture(0)
 
